@@ -9,7 +9,7 @@
 #include "class-integer.hpp"
 #include "class-matrix.hpp"
 #include "class-bint.hpp"
-#include "deque.hpp"
+#include "deck.hpp"
 
 std::default_random_engine randnum(time(NULL));
 
@@ -23,6 +23,7 @@ bool isEqual(Ans &ans, Test &test) {
     if (ans.empty()) return true;
 
     for (int i = 0; i < ans.size(); i++) {
+    // std::cerr<<i<<" ";
         if (randnum() % 2) {
             if (ans[i] != test[i]) return false;
         } else {
@@ -52,6 +53,7 @@ void randnumFill(Ans &ans, Test &test, int n = 2e5) {
 }
 
 bool pushTest() {
+    std::cerr<<"push"<<std::endl;
     std::deque<int> ans;
     sjtu::deque<int> deq;
 
@@ -69,6 +71,7 @@ bool pushTest() {
 }
 
 bool popTest() {
+    std::cerr<<"pop"<<std::endl;
     std::deque<long long> ans;
     sjtu::deque<long long> deq;
 
@@ -82,6 +85,7 @@ bool popTest() {
                     break;
         }
     }
+    // std::cerr<<"pop_end"<<ans.size()<<std::endl;
 
     return isEqual(ans, deq);
 }
@@ -89,26 +93,34 @@ bool popTest() {
 bool insertTest() {
     std::deque<int> ans, ans2, ans3;
     sjtu::deque<int> deq, deq2, deq3;
+    std::cerr<<"insert"<<std::endl;
 
     for (int i = 0; i < 100; i++) {
         int x = randnum();
         int pos = (ans.size() == 0 ? 0 : randnum() % ans.size());
 
         switch (randnum() % 2) {
-            case 0: deq.insert(deq.begin() + pos, x);
+            case 0: //std::cerr<<"   case : begin + ";
+                   // std::cerr<<pos<<std::endl;
+                    deq.insert(deq.begin() + pos, x);
                     ans.insert(ans.begin() + pos, x);
                     break;
-            case 1: deq.insert(deq.end() - pos, x);
+            case 1: //std::cerr<<"   case : end - ";
+                    //std::cerr<<pos<<std::endl;
+                    deq.insert(deq.end() - pos, x);
                     ans.insert(ans.end() - pos, x);
                     break;
         }
     }
+    // std::cerr<<"111"<<std::endl;
 
     ans2.insert(ans2.begin(), 0x5d); ans3.insert(ans3.end(), 93);
     deq2.insert(deq2.begin(), 0x5d); deq3.insert(deq3.end(), 93);
+    // std::cerr<<"115"<<std::endl;
 
     if (!isEqual(ans2, deq2) || !isEqual(ans3, deq3))
         return false;
+    // std::cerr<<"119"<<std::endl;
 
     return isEqual(ans, deq);
 }
@@ -260,12 +272,14 @@ bool copyAndClearTest() {
     {
         std::deque<DynamicType> ans;
         sjtu::deque<DynamicType> deq, deq2 = deq, deq3(deq2);
-
         // empty copy and clear
         deq.clear(); deq2.clear();  deq3.clear();
+        std::cerr<<__LINE__<<std::endl;
         deq = deq = deq; deq2 = deq3; deq3 = deq = deq3 = deq2;
 
+        std::cerr<<__LINE__<<std::endl;
         for (int i = 0; i < MAX_N; i++) {
+            std::cerr<<i<<" ";
             ans.push_back(DynamicType(&ansCounter));
             deq.push_back(DynamicType(&myCounter));
         }

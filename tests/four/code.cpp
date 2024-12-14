@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
-#include "deque.hpp"
+#include "deck.hpp"
 #include "exceptions.hpp"
 
 

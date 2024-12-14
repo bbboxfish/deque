@@ -11,7 +11,7 @@ Yours Sincerely. Rabbit.
 #include <iostream>
 #include <vector>
 #include <deque>
-#include "deque.hpp"
+#include "deck.hpp"
 
 long long randNum(long long x,long long maxNum)
 {
@@ -151,18 +151,20 @@ void TestInsertAndErase()
     dInt.insert(dInt.begin() + 23, 23);
     vInt.insert(vInt.begin() + 233, 233);
     dInt.insert(dInt.begin() + 233, 233);
+    std::cerr<<"insert_ok"<<std::endl;
     vInt.erase(vInt.begin() + 2333);
     dInt.erase(dInt.begin() + 2333);
+    std::cerr<<"erase_ok"<<std::endl;
     for (long long i = 0; i < N; ++i) {
         if (!(*(dInt.begin() + i) == vInt[i]))
-            error();
+           {std::cerr<<"error "<<(*(dInt.begin() + i) )<<" "<<vInt[i]<<std::endl;}
     }
     std::cout << "Correct." << std::endl;
 }
 
 void TestPopAndPush()
 {
-    std::cout << "Test 8 : Test for pop() and push()...";
+    std::cerr << "Test 8 : Test for pop() and push()...";
     sjtu::deque<long long> dInt, drInt;
     std::vector<long long> vInt;
     std::vector<long long> rInt;
@@ -171,16 +173,19 @@ void TestPopAndPush()
         dInt.push_back(i);
         vInt.push_back(i);
     }
+    // std::cerr<<"ok1"<<std::endl;
     for (size_t i = 0; i < 107LL; ++i)
     {
         dInt.pop_back();
         vInt.pop_back();
     }
+    // std::cerr<<"ok2"<<std::endl;
     for (size_t i = 0; i < 1114LL; ++i)
     {
         drInt.push_front(i);
         rInt.push_back(i);
     }
+    // std::cerr<<"ok3"<<std::endl;
     for (size_t i = 0; i < 107LL; ++i)
     {
         drInt.pop_front();

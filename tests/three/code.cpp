@@ -1,7 +1,7 @@
-#include "deque.hpp"
+#include <iostream>
+#include "deck.hpp"
 
 #include <ctime>
-#include <iostream>
 #include <deque>
 #include <random>
 #include <string>
